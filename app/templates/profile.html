@@ -1,0 +1,85 @@
+{% extends "layout.html" %}
+{% block body %}
+{% with errors = get_flashed_messages() %}
+<div class="container">
+    <h2>Edit Profile</h2>
+    {% if form.email.errors or errors or form.address.errors or form.password.errors or form.newpassword.errors or form.confirm.errors %}
+    <form class="was-validated" method="POST" id="login">
+        {{ form.csrf_token }}
+        <div class="form-group">
+        <label >email:</label>
+        {{ form.email(class="form-control", placeholder="email") }}
+        <div class="valid-feedback">Valid.</div>
+        {% for error in form.email.errors %}
+        <div class="invalid-feedback">{{ error }}</div>
+        {% endfor %}
+        {% for error in errors %}
+        <div class="invalid-feedback">{{ error }}</div>
+        {% endfor %}
+      </div>
+      <div class="form-group">
+        <label >address:</label>
+        {{ form.address(class="form-control", placeholder="address") }}
+        <div class="valid-feedback">Valid.</div>
+        {% for error in form.address.errors %}
+        <div class="invalid-feedback">{{ error }}</div>
+        {% endfor %}
+      </div>
+      <div class="form-group">
+        <label >(optional) new password:</label>
+        {{ form.newpassword(class="form-control", placeholder="new password") }}
+        <div class="valid-feedback">Valid.</div>
+        {% for error in form.newpassword.errors %}
+        <div class="invalid-feedback">{{ error }}</div>
+        {% endfor %}
+      </div>
+      <div class="form-group">
+        <label >confirm new password:</label>
+        {{ form.confirm(class="form-control", placeholder="confirm new password") }}
+        <div class="valid-feedback">Valid.</div>
+        {% for error in form.confirm.errors %}
+        <div class="invalid-feedback">{{ error }}</div>
+        {% endfor %}
+      </div>
+      <div class="form-group">
+        <label >verify password to save changes:</label>
+        {{ form.password(class="form-control", placeholder="password") }}
+        <div class="valid-feedback">Valid.</div>
+        {% for error in form.password.errors %}
+        <div class="invalid-feedback">{{ error }}</div>
+        {% endfor %}
+      </div>
+      {{ form.delete(class="btn btn-danger") }}
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    {% else %}
+    <form method="POST" id="login">
+        {{ form.csrf_token }}
+        <div class="form-group">
+        <label >email:</label>
+        {{ form.email(class="form-control", placeholder="email") }}
+      </div>
+      <div class="form-group">
+        <label >address:</label>
+        {{ form.address(class="form-control", placeholder="address") }}
+      </div>
+      <div class="form-group">
+        <label >(optional) new password:</label>
+        {{ form.newpassword(class="form-control", placeholder="new password") }}
+      </div>
+      <div class="form-group">
+        <label >confirm new password:</label>
+        {{ form.confirm(class="form-control", placeholder="confirm new password") }}
+      </div>
+      <div class="form-group">
+        <label >verify password to save changes:</label>
+        {{ form.password(class="form-control", placeholder="password") }}
+      </div>
+      {{ form.delete(class="btn btn-danger") }}
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    {% endif %}
+  </div>
+
+{% endwith %}
+{% endblock %}

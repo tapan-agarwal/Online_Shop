@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% if title %}{{ title }} | {% endif %}season's star</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+</head>
+<body>
+<nav class="navbar {% block navclass %}{% endblock %}" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+        <a class="navbar-item" href="{{ url_for('index') }}">
+            <img class="{% block logoclass %}logo{% endblock %}" src="{{ url_for('static', filename='img/logo.svg') }}" alt="season's star" width="112" height="28">
+        </a>
+        {% if self.navbar() %}
+        <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
+            data-target="navigation">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        {% endif %}
+    </div>
+
+    {% block navbar %}
+    <div id="navigation" class="navbar-menu">
+        {% if current_user.is_authenticated %}
+            <div class="navbar-end">
+
+                <a class="navbar-item">
+                   My Feed
+                </a>
+            
+                  <a class="navbar-item">
+                    Explore
+                  </a>
+
+                <div class="navbar-item has-dropdown is-hoverable">
+                    
+                        <div class="navbar-link level-right">
+                            <p class="level-item"><strong class="navbar-item">{{ current_user.username }}</strong><p>
+                            <div class="level-item">
+                                <figure class="image" style="height: 28px; width: 28px; object-fit: cover;">
+                                    <img class="is-rounded" src="https://source.unsplash.com/random" >
+                                </figure>
+                            </div>
+                        </div>
+                    
+                    <div class="navbar-dropdown is-right is-hidden-mobile is-boxed">
+                      <a class="navbar-item">
+                        My Profile
+                      </a>
+                      <a class="navbar-item">
+                        Settings
+                      </a>
+                      <hr class="navbar-divider">
+                      <a class="navbar-item" href="/logout">
+                        Log Out
+                      </a>
+                    </div>
+                  </div>
+            </div>
+        {% else %}
+            <div class="navbar-end">
+                <div class="navbar-item">
+                    <div class="buttons">
+                        <a class="button" href="/login">
+                            login
+                        </a>
+                        <a class="button is-primary" href="/signup">
+                            <strong>sign up</strong>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+    {% endblock %}
+</nav>
+{% block body %}
+{% endblock %}

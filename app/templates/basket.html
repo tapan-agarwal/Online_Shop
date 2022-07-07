@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+
+
+{% block body %}
+<div class="container">
+  <h2>Your Basket</h2>
+  <form method="POST" id="login">
+    {% if current_user.is_authenticated %}
+    <button type="submit" class="btn btn-primary">Checkout</<button type="button" name="button"></button>
+    {% else %}
+    < a href="/login" class="btn btn-primary">Checkout</a>
+    {% endif %}
+</div>
+{% endblock %}
+  

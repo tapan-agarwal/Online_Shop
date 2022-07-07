@@ -1,0 +1,14 @@
+{% extends 'header.html' %}
+{% block body %}
+  {% block body_with_footer %}
+    <section class="{% block sectionclass %}hero is-fullheight-with-navbar is-dark{% endblock %}">
+      <div class="hero-body">
+        {% block content %}
+        {% endblock %}
+      </div>
+    </section>
+  {% endblock %}
+  {% include 'footer.html' %}
+  </body>
+  </html>
+{% endblock %}
